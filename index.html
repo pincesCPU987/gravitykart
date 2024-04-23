@@ -339,7 +339,7 @@
       if (JSON.stringify(lastsavedstate) != JSON.stringify(tiles)) {
       	onbeforeunload = () => {document.cookie = 'backup=' + JSON.stringify(tiles); return '';};
       } else {
-      	onbeforeunload = () => {document.cookie = 'backup=' + JSON.stringify(tiles);};
+      	onbeforeunload = () => {alert('You closed the page. Exiting...');document.cookie = 'backup=' + JSON.stringify(tiles);};
       }
       
       if (mode == 1) {
