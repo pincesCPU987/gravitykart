@@ -36,12 +36,14 @@
         height: 50px;
         margin: auto;
         text-align: center;
-        vertical-align: middle;
         box-sizing: border-box;
         left: 25%;
         top: 10px;
         border: 1px solid black;
         background-color: gray;
+      }
+      #unsaved * {
+        vertical-align: middle;
       }
     </style>
   </head>
@@ -66,7 +68,7 @@
     <img src="./assets/guy12.png" id="guy12" class="load">
 
     <div id="unsaved">
-      Load backup level? <input type="button" value="Load" id="loadunsaved"> <input type="button" value="Discard" id="discardunsaved">
+      <span>Load backup level? <input type="button" value="Load" id="loadunsaved"> <input type="button" value="Discard" id="discardunsaved"></span>
     </div>
     
     <div id="main">
