@@ -337,9 +337,9 @@
       //await new Promise((rs, rj) => {setTimeout(rs, 100)})
       
       if (JSON.stringify(lastsavedstate) != JSON.stringify(tiles)) {
-      	onbeforeunload = () => {document.cookie = 'backup=' + JSON.stringify(tiles); return '';};
+      	onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles)); return '';};
       } else {
-      	onbeforeunload = () => {alert('You closed the page. Exiting...');document.cookie = 'backup=' + JSON.stringify(tiles);};
+      	onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles));};
       }
       
       if (mode == 1) {
@@ -689,18 +689,8 @@
     }
     
     run();
-
-    var cookielist = document.cookie;
-    alert(cookielist);
-    cookielist = cookielist.split(';');
     
-    var cookies = {};
-    
-    for (var i = 0; i < cookielist.length; i++) {
-      cookies[cookielist[i].split('=')[0]] = cookielist[i].split('=')[1];
-    }
-
-    if (cookies.backup) {
+    if (localStorage.getItem('backup')) {
       document.querySelector('#unsaved').style.display = 'block';
     } else {
       document.querySelector('#unsaved').style.display = 'none';
@@ -709,7 +699,7 @@
     document.querySelector('#loadunsaved').onclick = (e) => {
       document.querySelector('#unsaved').style.display = 'none';
 
-      let level = JSON.parse(cookies.backup);
+      let level = JSON.parse(localStorage.getItem('backup'));
       
       tiles = level;
     }
