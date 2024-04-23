@@ -303,6 +303,7 @@
       
       count = Math.floor((timestamp / 1000) * 20) * speed;
       count %= 3;
+      document.querySelector('link').href = './assets/guy0' + count + '.png';
       
       document.querySelector('#editordiv').innerHTML = `Player: (${(x / tilewidth).toFixed(3)}, ${(y / tileheight).toFixed(3)})<br>Life: <progress min="0" max="${hpstart}" value="${hp}"></progress><br>Level progress: <progress min="0" max="${levelwidth}" value="${x / tilewidth}"></progress>`
       
@@ -424,7 +425,7 @@
       }
       
       count = Math.floor((timestamp / 1000) * 20) * speed;
-      
+      count %= 3;
       document.querySelector('link').href = './assets/guy0' + count + '.png';
       
       if (mode == 0) {
