@@ -431,9 +431,9 @@
       document.querySelector('link').href = './assets/guy0' + count2 + '.png';
 
       if (JSON.stringify(lastsavedstate) != JSON.stringify(tiles)) {
-      	onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles)); return '';};
+      	onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles)); localStorage.setItem('backupwidth', levelwidth.toString(10)); localStorage.setItem('backupheight', levelheight.toString(10)); return '';};
       } else {
-      	onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles));};
+      	onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles)); localStorage.setItem('backupwidth', levelwidth.toString(10)); localStorage.setItem('backupheight', levelheight.toString(10));};
       }
       
       if (mode == 0) {
@@ -700,8 +700,10 @@
       document.querySelector('#unsaved').style.display = 'none';
 
       let level = JSON.parse(localStorage.getItem('backup'));
-      
       tiles = level;
+      
+      levelwidth = tiles[0].length;
+      levelheight = tiles.length;
     }
     document.querySelector('#discardunsaved').onclick = (e) => {
       document.querySelector('#unsaved').style.display = 'none';
