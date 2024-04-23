@@ -691,8 +691,9 @@
     run();
 
     var cookielist = document.cookie;
+    alert(cookielist);
     cookielist = cookielist.split(';');
-
+    
     var cookies = {};
     
     for (var i = 0; i < cookielist.length; i++) {
