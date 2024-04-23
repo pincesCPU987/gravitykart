@@ -307,8 +307,7 @@
 
       count2 = Math.floor((timestamp / 1000) * 2);
       count2 %= 3;
-      
-      document.querySelector('link').href = './assets/guy0' + count + '.png';
+      document.querySelector('link').href = './assets/guy0' + count2 + '.png';
       
       document.querySelector('#editordiv').innerHTML = `Player: (${(x / tilewidth).toFixed(3)}, ${(y / tileheight).toFixed(3)})<br>Life: <progress min="0" max="${hpstart}" value="${hp}"></progress><br>Level progress: <progress min="0" max="${levelwidth}" value="${x / tilewidth}"></progress>`
       
@@ -431,7 +430,7 @@
       
       count2 = Math.floor((timestamp / 1000) * 2);
       count2 %= 3;
-      document.querySelector('link').href = './assets/guy0' + count + '.png';
+      document.querySelector('link').href = './assets/guy0' + count2 + '.png';
       
       if (mode == 0) {
       	// Editing mode is done, quit.
