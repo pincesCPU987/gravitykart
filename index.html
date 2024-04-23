@@ -423,6 +423,10 @@
       	onbeforeunload = null;
       }
       
+      count = Math.floor((timestamp / 1000) * 20) * speed;
+      
+      document.querySelector('link').href = './assets/guy0' + count + '.png';
+      
       if (mode == 0) {
       	// Editing mode is done, quit.
         hp = hpstart;
