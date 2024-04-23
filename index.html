@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" href="./assets/guy00.png">
+    <style>
+      .load {
+        display: none;
+      }
+      
+      canvas {
+        border: 1px solid black;
+      }
+      
+      #main {
+        float: left;
+      }
+      
+      #credits {
+        float: right;
+        width: 50%;
+      }
+      
+      .user {
+        color: #008;
+        text-decoration: none;
+      }
+      
+      .user:hover {
+        color: #000;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAHBJREFUOE/tk9ENwCAIRM+ZdCZYwRFYwZ10JhvaYJo0acDPpvy/d2iOBGD23rEzpRQkEZm1VkQlChPRJdD0iMRg5ZbAJJ6naLLNQ9Bae3Uw87n6L/j2H2wXSaucc/bwGGOsMq1j8sKWYJKk5xyF75IDtKV0vVzb3nEAAAAASUVORK5CYIIA" id="block" class="load">
+    
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALlJREFUOE+dktERAyEIRKGqfN/M1WIL2RJICzaT0siceo4oGhN/dFx5wCJTWeEkvY7xTNu4wOxd20vRSXQJdSAj1YG8H0zHkSDDe7csWlXSVeEDrlweZKuF1qke8htAOkOxMYWavQ/OgiqI2Ro58cAD5ApCCBpjrHH58G3+i4/FfwXfQDBbQPFJRAj0tHknWgUIvUwAgKu13OFCa03UlBmge2++7lQbAG0ZQJ19AniaGaOIaCo9ry3tAwrqVx2puyEMAAAAAElFTkSuQmCC" id="guy00" class="load">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALdJREFUOE+dkt0VwyAIhWGqPueczOIKZQS6gst0NHoUYxXR2vii8YbPyw9CWeEEScd45m1chOhd95csk+gS6kBGqgN5PxCOI0OG/11bsHJiXPiA9JYH2UqhrZSF/AdgU1Da6EJ93QarIEKA2BdyUgMPoA5CCBJjrHF6+NX/xWDhreALSIgdgOEFRKSyyWKmfQGEwMydWYKnfi+0toiSAMnBtTejO9UqgLn3XFLJ+kqzbczDUxxsaR+k6lcdPqCyRQAAAABJRU5ErkJggg==" id="guy01" class="load">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAALlJREFUOE+dk9sRxCAIRaGq/c5MarEGSqAGm0lpZMRHFNHNrj9xvHC4gkEoK5wgaRtP/cyLEL3j8ZBlkV1SHchMdSDXB+E4FDLFu7Zg58S48AGplgd5dYW+UxbyG4BNQ+nFFFp1m5wFEQLEsZGLHniA7CCEIDHGlpc33+a/eVj4V3IFEuIIIARmBiJKrsa6C+0BlIAG7yEbrTWDOZdM1ZOLsld9p/VTkJpYQd3bX2p2jBqoPZh/HFe7AVVEXR0+kH19AAAAAElFTkSuQmCC" id="guy02" class="load">
+    
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAL1JREFUOE+VktERwyAMQ+2p+p27zMIK9QjuCizT0dzDQILBQJq/RNbDEkFoHmYWIqpf8InWDgkztx4goqpPtQGQNkigsokBeBoCi6RjGT796QCs0lK7ADpZNtYN4G2AM80CrGX/Rog5Y4mxdzQTlL3mqm65hLet6GwIQWKMl+8PAIAIAaI9dALIudwWu5wLgNNNyd0y5gCv2MeA1a10kHEDx/x9IRyHLj7M2w+7/2EVIZygrcezK7825piT9AMCclcd1be8hQAAAABJRU5ErkJggg==" id="guy10" class="load">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAL9JREFUOE+VU9sRwzAIE1P1O3eZxSuUEegKXqaj0fMzxq+kfMUBCSFsgg0NRxEBM9OTXC0SkQguwczhM+Z3ubaL5s5FQSUAsMwRRFNnpgg0KvBOx03uIghS8QmzJ5CdaJkzBJ1p90cmSh6UMe4hjcsJ268qF3T6ixEAnHPqva+4PwgAVQaRbbogmLgYVjGJDcHEG86eNURrgpmxjwl2W+lIRgUT8PdFOI6oe6i3P+7uw24EdyK+CX+aRzlcnH4RP5hjVx3rXpcGAAAAAElFTkSuQmCC" id="guy11" class="load">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAL1JREFUOE+VktkRwyAMRFdV5dszroUaVIJqoJmUpozFYZA5HP5A2od2gdAvFREw83VKb2ptk4nLcpBprQJERC/xJSwgZrb6qkYQNSGYqrCAkJjL2g1oGm38Iq6e0gW+1gNcatstE6UMio2tomngpPVPlTv8/NkfgBCCxhir7g8AoMog6i+dAJKv3lF6Ur8WgEE22XcLmQNGwb4GrF7FQZ4TDMTfD+E4bPBHf3+w+w8rC+GEpR5PF/79lYd5/QD7cV0dAppimQAAAABJRU5ErkJggg==" id="guy12" class="load">
+    -->
+    <img src="./assets/block.png" id="block" class="load">
+    <img src="./assets/guy00.png" id="guy00" class="load">
+    <img src="./assets/guy01.png" id="guy01" class="load">
+    <img src="./assets/guy02.png" id="guy02" class="load">
+    <img src="./assets/guy10.png" id="guy10" class="load">
+    <img src="./assets/guy11.png" id="guy11" class="load">
+    <img src="./assets/guy12.png" id="guy12" class="load">
+    
+    <div id="main">
+    <div id="loaderdiv">
+      Generating level (<span></span>%)
+      <progress id="loader" min="0" max="1" value="0"></progress>
+    </div>
+    
+    <canvas id="output"></canvas>
+    <div id="editordiv"></div>
+    <br>
+    Level width: <input type="number" id="width" value="1024">
+    <br>
+    Level height: <input type="number" id="height" value="32">
+    <br>
+    <br>
+    Upload .kc39 file: <input type="file" accept=".kc39" id="upload">
+    <br>
+    Download .kc39 file: <input type="button" id="download" value="Download">
+    </div>
+    <div id="credits">
+      Created by Online Sequencer user <a class="user" href="https://onlinesequencer.net/members/101877">@KirboCrafter39 <svg width="12" height="12"><path fill="#008" d="M0,0 L0,12 L12,12 L12,7 L10,7 L10,10 L2,10 L2,2 L5,2 L5,0 Z M5.29,5.29 L8.58,2 L7,2 L7,0 L12,0 L12,5 L10,5 L10,3.41 L6.71,6.71 Z"></path></svg></a>
+      <br>
+      Tested by:
+      <br>
+      <ul>
+        <li>Online Sequencer user <a class="user" href="https://onlinesequencer.net/members/135092">@V_O_I_D <svg width="12" height="12"><path fill="#008" d="M0,0 L0,12 L12,12 L12,7 L10,7 L10,10 L2,10 L2,2 L5,2 L5,0 Z M5.29,5.29 L8.58,2 L7,2 L7,0 L12,0 L12,5 L10,5 L10,3.41 L6.71,6.71 Z"></path></svg></a></li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    onbeforeunload = null;
+    
+    async function load() {
+    	var images = document.querySelectorAll('.load');
+      
+      for (var i = 0; i < images.length; i++) {
+      	while (images[i].width == 0) {
+        	await new Promise((rs, rj) => {requestAnimationFrame(rs);});
+        }
+      }
+    }
+    
+    async function run() {
+    	await load();
+      
+      for (var i = 0; i < levelheight; i++) {
+        
+        tiles.push([]);
+        lastsavedstate.push([]);
+        for (var j = 0; j < levelwidth; j++) {
+          //tiles[i].push(Math.round(Math.random()));
+          tiles[i].push(0);
+          lastsavedstate[i].push(0);
+        }
+        document.querySelector('#loader').value = tiles.length / levelheight;
+        document.querySelector('#loaderdiv').querySelector('span').innerHTML = Math.round((tiles.length / levelheight) * 100)
+        await new Promise((rs, rj) => {requestAnimationFrame(rs);});
+      }
+      
+      document.querySelector('#loaderdiv').style.display = 'none'
+      
+      requestAnimationFrame(editor);
+    }
+    
+    var speed = 4;
+    
+    var levelwidth = 1024;
+    var levelheight = 32;
+    
+    var screenwidth = 32;
+    var screenheight = 16;
+    
+    var tilewidth = 16;
+    var tileheight = 16;
+    
+    var tiles = [];
+    var lastsavedstate = [];
+    
+    var output = document.querySelector('#output');
+    var count = 0;
+    
+    output.width = screenwidth * tilewidth;
+    output.height = screenheight * tileheight;
+    
+    var x = 0;
+    var y = 0;
+    var gravity = 1;
+    
+    function update(timestamp) {
+    	var ctx = output.getContext('2d');
+      ctx.clearRect(0, 0, output.width, output.height);
+      
+      var tempx = x;
+      
+      if (tempx > (levelwidth - screenwidth) * tilewidth) {
+      	tempx = (levelwidth - screenwidth) * tilewidth;
+      }
+      
+      var offsetx = Math.floor(tempx / tilewidth);
+      var suboffsetx = tempx - (Math.floor(tempx / tilewidth) * tilewidth);
+      
+      var tempy = y - ((screenheight / 2) * tileheight);
+      if (tempy < 0) {
+        tempy = 0;
+      }
+      if (tempy > (levelheight - (screenheight)) * tileheight) {
+        tempy = (levelheight - screenheight) * tileheight;
+      }
+      
+      var offsety = Math.floor(tempy / tileheight);
+      var suboffsety = tempy - (Math.floor(tempy / tileheight) * tileheight);
+      
+      for (var i = offsety; i < offsety + screenheight + 1; i++) {
+        for (var j = offsetx; j < offsetx + screenwidth + 1; j++) {
+        	
+          if (tiles[i] && tiles[i][j] == 1) {
+          	ctx.drawImage(document.querySelector('#block'), ((j - offsetx) * tilewidth) - suboffsetx, ((i - offsety) * tileheight) - suboffsety);
+          }
+        }
+      }
+      
+      var tempx2 = 0;
+      if (x > (levelwidth - screenwidth) * tilewidth) {
+        tempx2 = x - ((levelwidth - screenwidth) * tilewidth);
+      }
+      
+      if (gravity == 1) {
+        if (y < Math.floor(screenheight / 2) * tileheight) {
+        	ctx.drawImage(document.querySelector('#guy0' + count), tempx2, y);
+        } else if (y > (levelheight - (screenheight / 2)) * tileheight) {
+        	ctx.drawImage(document.querySelector('#guy0' + count), tempx2, y - (levelheight - (screenheight)) * tileheight);
+        } else {
+        	ctx.drawImage(document.querySelector('#guy0' + count), tempx2, Math.floor(output.height / 2));
+        }
+      } else if (gravity == -1) {
+      	if (y < Math.floor(screenheight / 2) * tileheight) {
+        	ctx.drawImage(document.querySelector('#guy1' + count), tempx2, y);
+        } else if (y > (levelheight - (screenheight / 2)) * tileheight) {
+        	ctx.drawImage(document.querySelector('#guy1' + count), tempx2, y - (levelheight - (screenheight)) * tileheight);
+        } else {
+        	ctx.drawImage(document.querySelector('#guy1' + count), tempx2, Math.floor(output.height / 2));
+        }
+      }
+      
+      x+=speed;
+      
+      if (gravity == 1) {
+        y += speed;
+        
+        var tilebelowx = Math.floor((x + 1) / tilewidth);
+        var tilebelowy = Math.floor(y / tileheight) + 1;
+        
+        var tilefrontx = Math.floor(x / tilewidth) + 1;
+        var tilefronty = Math.floor(y / tileheight);
+        
+        var tilebelow = tiles[tilebelowy] ? tiles[tilebelowy][tilebelowx] : null;
+        var tilefront = tiles[tilefronty] ? tiles[tilefronty][tilefrontx] : null;
+        
+        
+        if (tilebelow) {
+        	y = Math.floor(y / tileheight) * tileheight;
+          if (spacedown && !holding) {
+            holding = true;
+            gravity = -1;
+          }
+        }
+        if (tilefront) {
+        	x = Math.floor(x / tilewidth) * tilewidth;
+          hp--;
+          
+          if (hp <= 0) {
+          	ctx.font = "32px Arial";
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#f00';
+            ctx.fillText("You lose (you ran into a wall)", (screenwidth / 2) * tilewidth, (screenheight / 2) * tileheight);
+            x = 0;
+            y = 0;
+            setTimeout(() => {mode = 1;requestAnimationFrame(editor);}, 2000);
+            return;
+          }
+        }
+        
+        if (y > (levelheight - 1) * tileheight) {
+        	ctx.font = "32px Arial";
+          ctx.textBaseline = 'middle';
+          ctx.textAlign = 'center';
+          ctx.fillStyle = '#f00';
+          ctx.fillText("You lose (you fell)", (screenwidth / 2) * tilewidth, (screenheight / 2) * tileheight);
+          x = 0;
+        	y = 0;
+          setTimeout(() => {mode = 1;requestAnimationFrame(editor);}, 2000);
+          return;
+        }
+        if (!spacedown) {
+          holding = false;
+        }
+        
+      } else if (gravity == -1) {
+        y -= speed;
+        
+        var tilebelowx = Math.floor((x + 1) / tilewidth);
+        var tilebelowy = Math.floor(y / tileheight);
+        
+        var tilefrontx = Math.floor(x / tilewidth) + 1;
+        var tilefronty = Math.floor((y + speed) / tileheight);
+        
+        var tilebelow = tiles[tilebelowy] ? tiles[tilebelowy][tilebelowx] : 0;
+        var tilefront = tiles[tilefronty] ? tiles[tilefronty][tilefrontx] : 0;
+        
+        if (tilebelow) {
+          y = Math.floor((y + speed) / tileheight) * tileheight;
+          if (spacedown && !holding) {
+            holding = true;
+            gravity = 1;
+          }
+        }
+        if (tilefront) {
+        	x = Math.floor(x / tilewidth) * tilewidth;
+          hp--;
+          
+          if (hp <= 0) {
+            ctx.font = "32px Arial";
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#f00';
+            ctx.fillText("You lose (you ran into a wall)", (screenwidth / 2) * tilewidth, (screenheight / 2) * tileheight);
+            x = 0;
+            y = 0;
+            setTimeout(() => {mode = 1;requestAnimationFrame(editor);}, 2000);
+            return;
+          }
+        }
+        
+        if (y < 0) {
+          ctx.font = "32px Arial";
+          ctx.textBaseline = 'middle';
+          ctx.textAlign = 'center';
+          ctx.fillStyle = '#f00';
+          ctx.fillText("You lose (you fell up?)", (screenwidth / 2) * tilewidth, (screenheight / 2) * tileheight);
+          x = 0;
+        	y = 0;
+          setTimeout(() => {mode = 1;requestAnimationFrame(editor);}, 2000);
+          return;
+        }
+        if (!spacedown) {
+          holding = false;
+        }
+        
+      }
+      
+      count = Math.floor((timestamp / 1000) * 20) * speed;
+      count %= 3;
+      
+      document.querySelector('#editordiv').innerHTML = `Player: (${(x / tilewidth).toFixed(3)}, ${(y / tileheight).toFixed(3)})<br>Life: <progress min="0" max="${hpstart}" value="${hp}"></progress><br>Level progress: <progress min="0" max="${levelwidth}" value="${x / tilewidth}"></progress>`
+      
+      if (x >= levelwidth * tilewidth) {
+      	ctx.font = "32px Arial";
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center';
+        var gradient = ctx.createLinearGradient(output.width / 4, output.height / 2, output.width - (output.width / 4), output.height / 2);
+        gradient.addColorStop(0, '#f00');
+        gradient.addColorStop(0.2, '#f80');
+        gradient.addColorStop(0.4, '#ff0');
+        gradient.addColorStop(0.6, '#0f0');
+        gradient.addColorStop(0.8, '#00f');
+        gradient.addColorStop(1, '#f0f');
+        ctx.fillStyle = gradient;
+        ctx.fillText("You are the winner!", (screenwidth / 2) * tilewidth, (screenheight / 2) * tileheight);
+        x = 0;
+        y = 0;
+        setTimeout(() => {mode = 1;requestAnimationFrame(editor);}, 2000);
+        return;
+      }
+      
+      //await new Promise((rs, rj) => {setTimeout(rs, 100)})
+      
+      if (JSON.stringify(lastsavedstate) != JSON.stringify(tiles)) {
+      	onbeforeunload = () => '';
+      } else {
+      	onbeforeunload = null;
+      }
+      
+      if (mode == 1) {
+      	// Game mode over, quit.
+        x = 0;
+        y = 0;
+        requestAnimationFrame(editor);
+      } else {
+      	requestAnimationFrame(update);
+      }
+    }
+    
+    function editor() {
+    	var ctx = output.getContext('2d');
+      ctx.clearRect(0, 0, output.width, output.height);
+      
+      var offsetx = Math.floor(x / tilewidth);
+      var suboffsetx = x - (Math.floor(x / tilewidth) * tilewidth);
+      
+      /*
+      var tempy = y - ((screenheight / 2) * tileheight);
+      if (tempy < 0) {
+        tempy = 0;
+      }
+      if (tempy > (levelheight - (screenheight)) * tileheight) {
+        tempy = (levelheight - screenheight) * tileheight;
+      }
+      
+      var offsety = Math.floor(tempy / tileheight);
+      var suboffsety = tempy - (Math.floor(tempy / tileheight) * tileheight);
+      */
+      
+      var offsety = Math.floor(y / tileheight);
+      var suboffsety = y - (Math.floor(y / tileheight) * tileheight);
+      
+      for (var i = offsety; i < offsety + screenheight + 1; i++) {
+        for (var j = offsetx; j < offsetx + screenwidth + 1; j++) {
+        	
+          if (tiles[i] && tiles[i][j] == 1) {
+          	ctx.drawImage(document.querySelector('#block'), ((j - offsetx) * tilewidth) - suboffsetx, ((i - offsety) * tileheight) - suboffsety);
+          }
+        }
+      }
+      
+      while (scrollactions.length > 0) {
+      	x += scrollactions[0].x * tilewidth;
+        y += scrollactions[0].y * tileheight;
+        
+        if (x < 0) {
+        	x = 0;
+        }
+        if (x >= (levelwidth - screenwidth) * tilewidth) {
+        	x = (levelwidth - screenwidth) * tilewidth;
+        }
+        
+        if (y < 0) {
+        	y = 0;
+        }
+        if (y >= (levelheight - screenheight) * tileheight) {
+        	y = (levelheight - screenheight) * tileheight;
+        }
+        
+        scrollactions.splice(0, 1);
+      }
+      
+      let tilex = Math.floor((mousex + x) / tilewidth);
+      let tiley = Math.floor((mousey + y) / tileheight);
+      document.querySelector('#editordiv').innerHTML = `Mouse: (${tilex}, ${tiley})<br><br><br>`;
+      
+      if (buttons.left) {
+      	let tilex = Math.floor((mousex + x) / tilewidth);
+        let tiley = Math.floor((mousey + y) / tileheight);
+        
+        if (tiley < levelheight && tilex < levelwidth) {
+        	tiles[tiley][tilex] = 1;
+        }
+      }
+      if (buttons.right) {
+      	let tilex = Math.floor((mousex + x) / tilewidth);
+        let tiley = Math.floor((mousey + y) / tileheight);
+        
+        if (tiley < levelheight && tilex < levelwidth) {
+        	tiles[tiley][tilex] = 0;
+        }
+      }
+      
+      if (JSON.stringify(lastsavedstate) != JSON.stringify(tiles)) {
+      	onbeforeunload = () => '';
+      } else {
+      	onbeforeunload = null;
+      }
+      
+      if (mode == 0) {
+      	// Editing mode is done, quit.
+        hp = hpstart;
+        gravity = 1;
+        requestAnimationFrame(update);
+      } else {
+      	requestAnimationFrame(editor);
+      }
+    }
+    
+    var hpstart = 60 * 1;
+    var hp = hpstart;
+    
+    var spacedown = false;
+    var holding = false;
+    
+    var buttons = {left: false, right: false};
+    var mousex = 0;
+    var mousey = 0;
+    
+    var mode = 1;
+    
+    onkeydown = (e) => {
+    	if (e.code == 'Space') {
+      	spacedown = true;
+      } else if (e.code == 'KeyE') {
+      	mode = 1 - mode;
+      }
+    }
+    
+    onkeyup = (e) => {
+    	if (e.code == 'Space') {
+      	spacedown = false;
+      }
+    }
+    
+    output.onmousedown = (e) => {
+      if (e.buttons & 1) {
+      	buttons.left = true;
+      } else {
+      	buttons.left = false;
+      }
+      if (e.buttons & 2) {
+      	buttons.right = true;
+      } else {
+      	buttons.right = false;
+      }
+    }
+    
+    output.onmouseup = (e) => {
+      if (e.buttons & 1) {
+      	buttons.left = true;
+      } else {
+      	buttons.left = false;
+      }
+      if (e.buttons & 2) {
+      	buttons.right = true;
+      } else {
+      	buttons.right = false;
+      }
+    }
+    
+    output.onclick = (e) => e.preventDefault();
+    output.oncontextmenu = (e) => e.preventDefault();
+    
+    output.onmousemove = (e) => {
+    	mousex = e.offsetX;
+      mousey = e.offsetY;
+      
+      if (mousex < 0) {
+      	mousex = 0;
+      }
+      if (mousex >= screenwidth * tilewidth) {
+      	mousex = screenwidth * tilewidth;
+      }
+      
+      if (mousey < 0) {
+      	mousey = 0;
+      }
+      if (mousey >= screenheight * tileheight) {
+      	mousey = screenheight * tileheight;
+      }
+    }
+    
+    var scrollactions = [];
+    
+    onwheel = (e) => {
+    	e.preventDefault();
+      //console.log(`e.shiftKey: ${e.shiftKey}, e.deltaX: ${e.deltaX}, e.deltaY: ${e.deltaY}, e.deltaMode: ${e.deltaMode}`)
+      
+      if (e.shiftKey) {
+        if (e.deltaY > 0) {
+        	scrollactions.push({x: (e.altKey ? 8 : 1), y: 0});
+        } else if (e.deltaY < 0) {
+        	scrollactions.push({x: (e.altKey ? -8 : -1), y: 0});
+        }
+      } else {
+      	if (e.deltaY > 0) {
+        	scrollactions.push({x: 0, y: e.altKey ? 8 : 1});
+        } else if (e.deltaY < 0) {
+        	scrollactions.push({x: 0, y: e.altKey ? -8 : -1});
+        }
+      }
+      return false;
+    }
+    
+    
+    var download = document.querySelector('#download');
+    var upload = document.querySelector('#upload');
+    
+    download.onclick = (e) => {
+    	var widthbits = levelwidth.toString(2).padStart(32, '0');
+      var heightbits = levelheight.toString(2).padStart(32, '0');
+      
+      widthbits = widthbits.substring(24, 32) + widthbits.substring(16, 24) + widthbits.substring(8, 16) + widthbits.substring(0, 8);
+      heightbits = heightbits.substring(24, 32) + heightbits.substring(16, 24) + heightbits.substring(8, 16) + heightbits.substring(0, 8);
+      
+      var bits = widthbits + heightbits;
+      
+      for (var i = 0; i < tiles.length; i++) {
+      	for (var j = 0; j < tiles[i].length; j++) {
+        	bits += tiles[i][j].toString();
+        }
+      }
+      while (bits.length % 8 != 0) {
+      	bits += '0';
+      }
+      
+      var arr = new Uint8Array(bits.length / 8);
+      for (var i = 0; i < bits.length; i+= 8) {
+      	arr[i / 8] = parseInt(bits.substring(i, i + 8), 2);
+      }
+      
+      var blob = new Blob([arr], {type: 'application/octet-stream'});
+      var url = window.URL.createObjectURL(blob);
+      
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'level.kc39';
+      a.click();
+      
+      lastsavedstate = [];
+      for (var i = 0; i < tiles.length; i++) {
+        lastsavedstate.push([]);
+        for (var j = 0; j < tiles[i].length; j++) {
+          lastsavedstate[i].push(tiles[i][j])
+        }
+      }
+    }
+    
+    upload.onchange = (e) => {
+    	var fr = new FileReader();
+      var file = upload.files[0];
+      
+      fr.onload = (e) => {
+      	var arr = new Uint8Array(fr.result);
+        
+        var width = 0;
+        for (var i = 3; i >= 0; i--) {
+        	width <<= 8;
+          width += arr[i];
+        }
+           	    
+        var height = 0;
+        for (var i = 7; i >= 4; i--) {
+        	height <<= 8;
+          height += arr[i];
+        }
+        
+        levelwidth = width;
+        levelheight = height;
+        
+        widthtxt.value = width;
+        heighttxt.value = height;
+        
+        var bits = '';
+        
+        for (var i = 8; i < arr.length; i++) {
+        	bits += arr[i].toString(2).padStart(8, '0');
+        }
+        
+        bits = bits.match(new RegExp(`.{${width}}`, 'g'));
+        
+        var newTiles = [];
+        
+        for (var i = 0; i < bits.length; i++) {
+        	newTiles.push([]);
+          for (var j = 0; j < bits[i].length; j++) {
+          	newTiles[i].push(Number(bits[i][j]));
+          }
+        }
+        tiles = newTiles;
+        
+        lastsavedstate = [];
+        for (var i = 0; i < tiles.length; i++) {
+          lastsavedstate.push([]);
+          for (var j = 0; j < tiles[i].length; j++) {
+            lastsavedstate[i].push(tiles[i][j])
+          }
+        }
+      }
+      fr.readAsArrayBuffer(file);
+    }
+    
+    var widthtxt = document.querySelector('#width');
+    var heighttxt = document.querySelector('#height');
+    
+    widthtxt.onkeydown = (e) => {
+    	if (e.code != 'Enter') return;
+      
+      var value = Number(widthtxt.value);
+      if (isNaN(value)) {
+      	widthtxt.value = levelwidth;
+        return;
+      }
+      
+      if (value < levelwidth) {
+      	for (var i = 0; i < tiles.length; i++) {
+        	tiles[i].splice(value, levelwidth - value);
+        }
+      } else {
+      	for (var i = 0; i < tiles.length; i++) {
+        	for (var j = 0; j < value - levelwidth; j++) {
+          	tiles[i].push(0);
+          }
+        }
+      }
+      levelwidth = value;
+    }
+    
+    heighttxt.onkeydown = (e) => {
+    	if (e.code != 'Enter') return;
+      
+      var value = Number(heighttxt.value);
+      if (isNaN(value)) {
+      	heighttxt.value = levelheight;
+        return;
+      }
+      
+      if (value < levelheight) {
+      	tiles.splice(value, levelheight - value);
+      } else {
+      	for (var i = levelheight; i < value; i++) {
+        	tiles.push([]);
+         	for (var j = 0; j < levelwidth; j++) {
+          	tiles[i].push(0);
+          }
+        }
+      }
+      levelheight = value;
+    }
+    
+    run();
+    
+    var users = document.querySelectorAll('.user');
+    
+    for (var i = 0; i < users.length; i++) {
+    	users[i].onmouseenter = (e) => {
+        e.target.querySelector('path').setAttribute('fill', '#000');
+        
+      }
+      users[i].onmouseleave = (e) => {
+      	e.target.querySelector('path').setAttribute('fill', '#008');
+      }
+    }
+  </script>
+</html>
