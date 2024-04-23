@@ -50,6 +50,10 @@
     <img src="./assets/guy10.png" id="guy10" class="load">
     <img src="./assets/guy11.png" id="guy11" class="load">
     <img src="./assets/guy12.png" id="guy12" class="load">
+
+    <div id="unsaved">
+      Load backup level? <input type="button" value="Load" id="loadunsaved"> <input type="button" value="Discard" id="discardunsaved">
+    </div>
     
     <div id="main">
     <div id="loaderdiv">
@@ -333,9 +337,9 @@
       //await new Promise((rs, rj) => {setTimeout(rs, 100)})
       
       if (JSON.stringify(lastsavedstate) != JSON.stringify(tiles)) {
-      	onbeforeunload = () => '';
+      	onbeforeunload = () => {document.cookie = 'backup=' + JSON.stringify(tiles); return '';};
       } else {
-      	onbeforeunload = null;
+      	onbeforeunload = () => {document.cookie = 'backup=' + JSON.stringify(tiles);};
       }
       
       if (mode == 1) {
@@ -685,6 +689,32 @@
     }
     
     run();
+
+    var cookielist = document.cookie;
+    cookielist = cookielist.split(';');
+
+    var cookies = {};
+    
+    for (var i = 0; i < cookielist.length; i++) {
+      cookies[cookielist[i].split('=')[0]] = cookielist[i].split('=')[1];
+    }
+
+    if (cookies.backup) {
+      document.querySelector('#unsaved').style.display = 'block';
+    } else {
+      document.querySelector('#unsaved').style.display = 'none';
+    }
+
+    document.querySelector('#loadunsaved').onclick = (e) => {
+      document.querySelector('#unsaved').style.display = 'none';
+
+      let level = JSON.parse(cookies.backup);
+      
+      tiles = level;
+    }
+    document.querySelector('#discardunsaved').onclick = (e) => {
+      document.querySelector('#unsaved').style.display = 'none';
+    }
     
     var users = document.querySelectorAll('.user');
     
