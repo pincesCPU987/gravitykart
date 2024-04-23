@@ -2,9 +2,6 @@
 <html>
   <head>
     <link rel="icon" href="./assets/guy00.png">
-    <script>
-      onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles));};
-    </script>
     <style>
       .load {
         display: none;
@@ -343,11 +340,11 @@
       
       //await new Promise((rs, rj) => {setTimeout(rs, 100)})
       
-      //if (JSON.stringify(lastsavedstate) != JSON.stringify(tiles)) {
-      	//onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles)); return '';};
-      //} else {
-      	//
-      //}
+      if (JSON.stringify(lastsavedstate) != JSON.stringify(tiles)) {
+      	onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles)); return '';};
+      } else {
+      	onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles));};
+      }
       
       if (mode == 1) {
       	// Game mode over, quit.
@@ -433,15 +430,15 @@
         }
       }
       
-      if (JSON.stringify(lastsavedstate) != JSON.stringify(tiles)) {
-      	onbeforeunload = () => '';
-      } else {
-      	onbeforeunload = null;
-      }
-      
       count2 = Math.floor((timestamp / 1000) * 3);
       count2 %= 3;
       document.querySelector('link').href = './assets/guy0' + count2 + '.png';
+
+      if (JSON.stringify(lastsavedstate) != JSON.stringify(tiles)) {
+      	onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles)); return '';};
+      } else {
+      	onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles));};
+      }
       
       if (mode == 0) {
       	// Editing mode is done, quit.
