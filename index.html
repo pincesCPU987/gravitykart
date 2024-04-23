@@ -2,6 +2,9 @@
 <html>
   <head>
     <link rel="icon" href="./assets/guy00.png">
+    <script>
+      onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles));};
+    </script>
     <style>
       .load {
         display: none;
@@ -340,11 +343,11 @@
       
       //await new Promise((rs, rj) => {setTimeout(rs, 100)})
       
-      if (JSON.stringify(lastsavedstate) != JSON.stringify(tiles)) {
-      	onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles)); return '';};
-      } else {
-      	onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles));};
-      }
+      //if (JSON.stringify(lastsavedstate) != JSON.stringify(tiles)) {
+      	//onbeforeunload = () => {localStorage.setItem('backup', JSON.stringify(tiles)); return '';};
+      //} else {
+      	//
+      //}
       
       if (mode == 1) {
       	// Game mode over, quit.
