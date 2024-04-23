@@ -429,8 +429,8 @@
       	onbeforeunload = null;
       }
       
-      count = Math.floor((timestamp / 1000) * 20) * speed;
-      count %= 3;
+      count2 = Math.floor((timestamp / 1000) * 3);
+      count2 %= 3;
       document.querySelector('link').href = './assets/guy0' + count + '.png';
       
       if (mode == 0) {
