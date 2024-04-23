@@ -60,10 +60,6 @@
       Generating level (<span></span>%)
       <progress id="loader" min="0" max="1" value="0"></progress>
     </div>
-
-    <div id="debug">
-    
-    </div>
       
     <canvas id="output"></canvas>
     <div id="editordiv"></div>
@@ -693,13 +689,7 @@
     }
     
     run();
-
-    document.querySelector('#debug').innerHTML = localStorage.getItem('backup');
-
-    if (localStorage) {
-      alert('hey')
-    }
-    
+        
     if (localStorage.getItem('backup')) {
       document.querySelector('#unsaved').style.display = 'block';
     } else {
